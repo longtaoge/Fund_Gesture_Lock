@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_enabled="true" android:state_pressed="true" android:drawable="@drawable/btn_back_pressed" />
+    <item android:state_enabled="true" android:drawable="@drawable/btn_back_normal" />
+</selector>
+<!-- From: file:/J:/domes/Fund_Gesture_Lock/app/src/main/res/drawable/titlebar_back_selector.xml -->
