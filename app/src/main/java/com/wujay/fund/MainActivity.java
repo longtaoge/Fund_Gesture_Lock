@@ -27,7 +27,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, OnChe
 	    initView();
 		setUpListener();
 	}
-	
+
 
 	
 	private void setUpListener() {
