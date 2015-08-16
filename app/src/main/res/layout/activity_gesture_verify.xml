@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
             android:gravity="center_horizontal"
-            android:text="152****8888"
+            android:text=""
             android:textColor="#8C806F" />
 
         <TextView

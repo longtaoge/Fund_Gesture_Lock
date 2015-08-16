@@ -18,6 +18,8 @@ import com.wujay.fund.common.BeanFactory;
 import com.wujay.fund.widget.GestureContentView;
 import com.wujay.fund.widget.GestureDrawline.GestureCallBack;
 
+import de.greenrobot.event.EventBus;
+
 /**
  * 
  * 手势绘制/校验界面
@@ -33,13 +35,13 @@ public class GestureVerifyActivity extends Activity implements
 	private TextView mTextTip;
 	private FrameLayout mGestureContainer;
 	private GestureContentView mGestureContentView;
-	private TextView mTextForget;
+	private TextView mTextForget,text_phone_number;
 	private TextView mTextOther;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_gesture_verify);
-	
+		EventBus.getDefault().register(this);
 		setUpViews();
 		setUpListeners();
 	}
@@ -49,7 +51,8 @@ public class GestureVerifyActivity extends Activity implements
 	private void setUpViews() {
 		
 		mTextCancel = (TextView) findViewById(R.id.text_cancel);
-
+		text_phone_number= (TextView) findViewById(R.id.text_phone_number);
+		EventBus.getDefault().post(Config.defultPass);
 		mTextTip = (TextView) findViewById(R.id.text_tip);
 		mGestureContainer = (FrameLayout) findViewById(R.id.gesture_container);
 		mTextForget = (TextView) findViewById(R.id.text_forget_gesture);
@@ -67,7 +70,7 @@ public class GestureVerifyActivity extends Activity implements
 					@Override
 					public void checkedSuccess() {
 						mGestureContentView.clearDrawlineState(0L);
-						Toast.makeText(GestureVerifyActivity.this, "密码正确", 1000)
+						Toast.makeText(GestureVerifyActivity.this, "密码正确", Toast.LENGTH_LONG)
 								.show();
 						GestureVerifyActivity.this.finish();
 					}
@@ -121,4 +124,22 @@ public class GestureVerifyActivity extends Activity implements
 		 //super.onBackPressed();
 	}
 
+	/**
+	 * @see #onPause
+	 * @see #onStop
+	 * @see #finish
+	 * @see #isFinishing
+	 */
+	@Override
+	protected void onDestroy() {
+		EventBus.getDefault().unregister(this);
+		super.onDestroy();
+
+	}
+
+
+	public void onEventMainThread(String number) {
+
+		text_phone_number.setText(number);
+	}
 }
